@@ -45,6 +45,153 @@ setTimeout(() => {
     dome3.innerHTML = anyThing;
 },2000)
 
+//第五个例子
+//定义了一个接口 Person，接着定义了一个变量 tom，它的类型是 Person。这样，我们就约束了 tom 的形状必须和接口 Person 一致
+//接口一般首字母大写,这是正确写法
+interface Person {
+    name : string,
+    age : number
+}
+
+let tom : Person = {
+    name : 'mumu',
+    age : 22
+}
+
+//错误写法
+//(1)定义的变量比接口少了一些属性是不允许的
+//  let tom : Person = {
+//      name : 'mumu'
+//  }
+
+//(2)多一些属性也是不允许的
+// let tom: Person = {
+//     name: 'Tom',
+//     age: 25,
+//     gender: 'male'
+// };
+
+
+//可选属性
+//age属性是可选属性，可以存在也可以不存在
+interface Aab {
+    name : string,
+    age ?: number
+}
+
+let abc : Aab = {
+    name : 'mumu'
+}
+
+//任意属性
+//下面是正确写法 
+//注意 ： 一旦定义了任意属性，那么确定属性和可选属性的类型都必须是它的类型的子集 //[propName : string] : string 
+interface Abb {
+    name : string,
+    age ?: number,
+    [propName : string] : any
+}
+
+let aBB : Abb = {
+    name : 'mumu',
+    age : 12,
+    gender : 'modle'
+}
+
+//只读属性
+interface Baa {
+    readonly id : number,
+    name : string,
+    age ?: number,
+    [propName : string] : any
+}
+
+let bAA : Baa = {
+    id : 12345,
+    name : 'mumu',
+    gender : 'modle' //因为定义了任意属性 所以这里可以是任意类型 比如：[] , {} , string , number
+}
+
+
+//数组的类型
+//「类型 + 方括号」来表示数组
+let fibonacci : number[] = [1,2,3,4,5,6]
+//数组的项中不允许出现其他的类型
+// let fibonacci1 : number[] = [1,2,3,4,'5',6]
+//只允许传入number类型的参数
+// fibonacci1.push('8')
+
+
+//泛型
+function createArray(length : number , value : any) : Array<any> {
+    let result = [];
+    for(let i = 0; i < length ; i++){
+        result[i] = value;
+    }
+    console.log(result);
+    return result;
+}
+
+createArray(4 , 'x'); //['x','x','x','x']
+
+//泛型约束
+//只允许这个函数传入那些包含 length 属性的变量
+interface lengthwise {
+    length : number
+}
+
+function logging<T extends lengthwise>(arg : T) : T {
+    console.log(arg.length);
+    return arg;
+}
+
+logging([1,2,3,4,5,6,7]);
+
+//函数额类型
+//一个函数有输入和输出，要在 TypeScript 中对其进行约束，需要把输入和输出都考虑到
+function myNum(x : number , y : number) : number {
+    console.log(x + y);
+    return x + y;
+}
+myNum(1,2)
+//注意，输入多余的（或者少于要求的）参数，是不被允许的
+// myNum(1)
+// myNum(1,2,3)
+
+
+//函数表达式
+let Sum : (x : number , y : number) => number = function(x : number , y : number) : number {
+    console.log(x * y)
+    return x * y;
+}
+Sum(3 , 5);
+
+//可选参数
+function buildName(firstName : string , lastName ?: string) {
+    if(lastName){
+        return firstName + ' ' + lastName;
+    }else {
+        return lastName;
+    }
+}
+buildName('tom' , 'cat')
+
+//将一个联合类型的变量指定为一个更加具体的类型
+
+function getLength(some : string | number) : number {
+    if((<string>some).length){
+        return (<string>some).length;
+    }else {
+        return some.toString().length;
+    }
+
+}
+
+
+
+
+
+
 
 
 
