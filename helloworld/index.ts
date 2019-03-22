@@ -226,9 +226,33 @@ xctitle1 = ['tom' , 22];
 //    xctitle2 = ['tom'];
 //    xctitle2[1] = 25;
 
+//越界的元素
+let xctitle3 : [string , number];
+xctitle3 = ['tom' , 21];
+xctitle3.push('www.baidu.com');
+// xctitle3.push(true); 添加越界的元素是，它的类型会被限制为元祖中每个类型的联合类型
 
+//枚举 
+enum Days {Sun, Mon, Tue, Wed, Thu, Fri, Sat}
 
+console.log(Days[0] === 'Sun'); //true
+console.log(Days[1] === 'Mon'); //true
+console.log(Days[3] === 'Wed'); //true
+console.log(Days[5] === 'Fri'); //true
 
+console.log(Days['Sun'] === 0);//true
+console.log(Days['Tue'] === 2);//true
+console.log(Days['Thu'] === 3);//false
+console.log(Days['Sat'] === 5);//false
+
+//手动赋值枚举项  可以不是数字
+enum Days1 {Sun = 2, Mon, Tue, Wed, Thu, Fri, Sat = <any>'S'}
+
+//常数项和计算所得项
+enum Color {Red , Green , Blue = 'blue'.length}
+
+//如果紧接在计算所得项后面的是未手动赋值的项，那么它就会因为无法获得初始值而报错
+// enum Color1 {Red = 'red'.length , Green , Blue}
 
 
 
