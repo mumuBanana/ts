@@ -188,6 +188,45 @@ function getLength(some : string | number) : number {
 }
 
 
+//类型别名
+//类型别名用来给一个类型起个新名字。
+type names = string;
+type nameResolver = () => string;
+type nameOrResolver = names | nameResolver;
+function getName(n : nameOrResolver) : names {
+    if (typeof n === 'string') {
+        return n
+    } else {
+        return n();
+    }
+}
+
+//元祖
+//定义一对值分别为 string 和 number 的元组
+let xctitle : [string , number] = ['mao' , 25];
+
+//定义一对值分别为 string 和 number 的元组
+
+let xctitle1 : [string , number];
+xctitle1[0] = 'tom';
+xctitle1[1] = 25;
+
+xctitle1[0].slice(1);
+xctitle1[1].toFixed(2);
+
+//也可以只赋值其中一项
+xctitle1[0] = 'tom';
+
+//直接对元组类型的变量进行初始化或者赋值的时候，需要提供所有元组类型中指定的项
+xctitle1 = ['tom' , 22];
+
+//不能这样操作
+//(1) let xctitle2 : [string , number] = ['tom' ];
+//(2) let xctitle2 : [string , number];
+//    xctitle2 = ['tom'];
+//    xctitle2[1] = 25;
+
+
 
 
 
